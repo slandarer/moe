@@ -1,4 +1,4 @@
-function Dog(change_times) {
+function Moe(change_times) {
     this.row = 5;
     this.col = 5;
     this.change_times = change_times;
@@ -6,12 +6,12 @@ function Dog(change_times) {
     this.tds = [];
     this.parent = document.querySelector('.gameBox');
 }
-Dog.prototype.init = function () {
+Moe.prototype.init = function () {
     for (var i = 0; i <this.row; i++) {
         this.squares[i] = [];
         for (var j = 0; j <this.col; j++) {
                 this.squares[i][j] = {
-                    type: 'doga',
+                    type: 'moe',
                 };
         }
     }
@@ -29,7 +29,7 @@ Dog.prototype.init = function () {
     }
    
 };
-Dog.prototype.randomNum = function () {
+Moe.prototype.randomNum = function () {
     var square = new Array(this.row * this.col);
     for (var i = 0; i < square.length; i++) {
         square[i] = i;
@@ -41,7 +41,7 @@ Dog.prototype.randomNum = function () {
 }
 
 
-Dog.prototype.createDom = function () {
+Moe.prototype.createDom = function () {
     console.log(this.squares);
     var This = this;
     var table = document.createElement('table');
@@ -64,21 +64,21 @@ Dog.prototype.createDom = function () {
     }
     for (var i = 0; i <this.row; i++) {
         for (var j = 0; j <this.col; j++) {
-            this.tds[i][j].className='doga'
+            this.tds[i][j].className='moe'
         }
     }
     this.parent.innerHTML = '';
     this.parent.appendChild(table);
 }
-Dog.prototype.play = function (ev, obj) {
-    this.squares[obj.pos[0]][obj.pos[1]].type = (this.squares[obj.pos[0]][obj.pos[1]].type == 'doga' ?'dogb':'doga');
+Moe.prototype.play = function (ev, obj) {
+    this.squares[obj.pos[0]][obj.pos[1]].type = (this.squares[obj.pos[0]][obj.pos[1]].type == 'moe' ?'lov':'moe');
     obj.className = this.squares[obj.pos[0]][obj.pos[1]].type;
     for (var i = obj.pos[0] - 1; i <= obj.pos[0] + 1;i++) {
         for (var j = obj.pos[1] - 1; j <= obj.pos[1] + 1; j++) {
             if (i - obj.pos[0] == obj.pos[1]-j|| i - obj.pos[0] == j - obj.pos[1] || i < 0 || i >=this.row || j < 0 || j >= this.col) {
 
             } else {
-                this.tds[i][j].className = (this.tds[i][j].className == 'doga' ? 'dogb' : 'doga');
+                this.tds[i][j].className = (this.tds[i][j].className == 'moe' ?'lov':'moe');
                 this.squares[i][j].className = this.tds[i][j].className;
                 this.squares[i][j].type = this.squares[i][j].className;
             }
@@ -103,7 +103,7 @@ Dog.prototype.play = function (ev, obj) {
     }
 }
 var btns = document.querySelectorAll('.level button');
-var dog = null;
+var moe = null;
 var ln = 0;
 var arr = [3, 5, 10];
 for (let i = 0; i < btns.length - 1; i++) {
@@ -112,8 +112,8 @@ for (let i = 0; i < btns.length - 1; i++) {
             btns[k].className = '';
             this.className = 'active';
         }
-        dog = new Dog(arr[i]);
-        dog.init();
+        moe = new Moe(arr[i]);
+        moe.init();
         //console.log(i);
 
     }
